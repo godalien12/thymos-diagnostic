@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>THYMOS NEURO | Operative Diagnostic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        :root { --bg: #0d1117; --card: #161b22; --text: #c9d1d9; --accent: #58a6ff; --border: #30363d; }
+        body { background-color: var(--bg); color: var(--text); font-family: -apple-system, sans-serif; padding: 20px; }
+        .container { max-width: 600px; margin: auto; background: var(--card); padding: 30px; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h2 { color: var(--accent); margin-top: 0; }
+        label { display: block; margin-top: 15px; font-weight: bold; font-size: 0.9em; }
+        input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 6px; box-sizing: border-box; }
+        .role-group { display: none; margin-top: 15px; padding: 15px; background: rgba(88, 166, 255, 0.05); border-radius: 8px; border-left: 4px solid var(--accent); }
+        button { width: 100%; padding: 12px; margin-top: 25px; background: var(--accent); border: none; color: white; font-weight: bold; border-radius: 6px; cursor: pointer; }
+        button:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>THYMOS NEURO</h2>
+    <p>Operative Diagnostic | Phase 1</p>
+    <hr style="border: 0.5px solid var(--border);">
+
+    <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" enctype="multipart/form-data">
+        
+        <label>Full Legal Designation</label>
+        <input type="text" name="name" placeholder="Enter Name" required>
+
+        <label>Direct Email Contact</label>
+        <input type="email" name="_replyto" placeholder="email@example.com" required>
+
+        <label>Primary Division</label>
+        <select name="division" id="division" onchange="showRoles()" required>
+            <option value="">-- Select Division --</option>
+            <option value="exec">Executive Team</option>
+            <option value="tech">Technology & Systems</option>
+            <option value="outreach">Outreach & Partnership</option>
+            <option value="ops">HR & Operations</option>
+        </select>
+
+        <div id="exec-group" class="role-group">
+            <label>Executive Roles:</label>
+            <input type="checkbox" name="role[]" value="Co-Executive"> Co-Executive<br>
+            <input type="checkbox" name="role[]" value="CTO"> CTO<br>
+            <input type="checkbox" name="role[]" value="CHRO"> CHRO
+        </div>
+
+        <div id="tech-group" class="role-group">
+            <label>Tech Roles:</label>
+            <input type="checkbox" name="role[]" value="Systems Director"> Systems Director<br>
+            <input type="checkbox" name="role[]" value="Web Dev"> Web Dev<br>
+            <input type="checkbox" name="role[]" value="Automation Lead"> Automation Lead
+        </div>
+
+        <div id="outreach-group" class="role-group">
+            <label>Outreach Roles:</label>
+            <input type="checkbox" name="role[]" value="Outreach Director"> Outreach Director<br>
+            <input type="checkbox" name="role[]" value="Partnership Coord"> Partnership Coordinator<br>
+            <input type="checkbox" name="role[]" value="Media Head"> Media Head
+        </div>
+
+        <label>Portfolio Upload (Required for Leadership)</label>
+        <input type="file" name="upload">
+
+        <label>Strategic Vision</label>
+        <textarea name="vision" rows="4" placeholder="Briefly describe your goals..."></textarea>
+
+        <button type="submit">TRANSMIT DATA</button>
+    </form>
+</div>
+
+<script>
+    function showRoles() {
+        // Hide all groups first
+        document.querySelectorAll('.role-group').forEach(div => div.style.display = 'none');
+        
+        // Show selected group
+        const selection = document.getElementById('division').value;
+        if (selection) {
+            const target = document.getElementById(selection + '-group');
+            if (target) target.style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>
