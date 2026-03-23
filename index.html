@@ -5,110 +5,133 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        :root { --bg: #f8fafc; --glass: rgba(255, 255, 255, 0.98); --text: #0f172a; --accent: #2563eb; --dark: #1e293b; --cyan: #06b6d4; }
-        body { background: radial-gradient(circle at top right, #e2e8f0, #f1f5f9); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; padding: 40px 20px; display: flex; justify-content: center; }
-        .form-container { max-width: 750px; width: 100%; background: var(--glass); backdrop-filter: blur(15px); padding: 50px; border-radius: 28px; border: 1px solid white; box-shadow: 0 25px 50px rgba(0,0,0,0.08); position: relative; }
-        h2 { font-size: 2.4rem; margin: 0; letter-spacing: -2px; font-weight: 900; color: var(--dark); }
-        .subtitle { color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 30px; letter-spacing: 3px; }
+        :root { 
+            --bg: #f8fafc; 
+            --text: #0f172a; 
+            --accent: #2563eb; 
+            --dark: #1e293b;
+            --border: #cbd5e1;
+        }
+        body { 
+            background: #f1f5f9; 
+            color: var(--text); 
+            font-family: 'Inter', -apple-system, sans-serif; 
+            margin: 0; padding: 50px 20px;
+            display: flex; justify-content: center;
+        }
+        .form-container { 
+            max-width: 800px; width: 100%; 
+            background: white; padding: 50px; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+        h2 { font-size: 2.2rem; margin: 0 0 10px 0; font-weight: 900; color: var(--dark); }
+        .subtitle { color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 30px; display: block; letter-spacing: 2px; }
+
+        /* --- THE FIELDS --- */
+        .group { margin-bottom: 25px; }
+        label { display: block; font-weight: 700; margin-bottom: 10px; font-size: 0.85rem; color: #475569; text-transform: uppercase; }
         
-        .role-assignment-note { font-size: 0.85rem; color: #64748b; background: #f1f5f9; padding: 12px; border-radius: 10px; margin-bottom: 25px; border-left: 4px solid var(--accent); }
+        input, select, textarea { 
+            width: 100%; padding: 16px; border: 1.5px solid var(--border);
+            border-radius: 10px; font-size: 1rem; box-sizing: border-box;
+            background: #ffffff; transition: 0.2s;
+        }
+        input:focus, select:focus, textarea:focus { 
+            outline: none; border-color: var(--accent); 
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); 
+        }
 
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .full-width { grid-column: span 2; }
+        /* ROLE ASSIGNMENT MESSAGE */
+        .assignment-msg { 
+            font-size: 0.85rem; color: #64748b; margin-top: 10px; 
+            font-weight: 500; font-style: italic; 
+        }
 
-        .group { margin-bottom: 20px; }
-        label { display: block; font-weight: 800; margin-bottom: 8px; font-size: 0.75rem; color: #475569; text-transform: uppercase; }
-        input, select, textarea { width: 100%; padding: 14px; border-radius: 10px; border: 1px solid #cbd5e1; background: white; font-size: 1rem; box-sizing: border-box; transition: 0.3s; }
-        input:focus, select:focus, textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+        /* PORTFOLIO SECTION */
+        .portfolio-box { 
+            background: var(--dark); color: white; padding: 30px; 
+            border-radius: 12px; margin: 35px 0; 
+        }
+        .portfolio-box label { color: #38bdf8; }
+        .portfolio-box textarea { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; }
 
-        .work-section { background: var(--dark); color: white; padding: 25px; border-radius: 20px; margin: 25px 0; }
-        .work-section label { color: var(--cyan); }
-        .work-section textarea { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; margin-top: 10px; }
-
-        .submit-btn { width: 100%; padding: 20px; background: var(--dark); color: white; border: none; border-radius: 12px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 1.1rem; }
-        .submit-btn:hover { background: var(--accent); transform: translateY(-3px); }
-
-        /* SUCCESS MESSAGE HIDDEN BY DEFAULT */
-        #success-msg { display: none; text-align: center; padding: 40px 0; }
-        .discord-btn { display: inline-block; margin-top: 20px; padding: 15px 30px; background: #5865F2; color: white; text-decoration: none; border-radius: 10px; font-weight: 800; }
+        .submit-btn { 
+            width: 100%; padding: 20px; background: var(--dark); color: white; 
+            border: none; border-radius: 10px; font-weight: 800; font-size: 1.1rem;
+            cursor: pointer; transition: 0.3s; margin-top: 10px;
+        }
+        .submit-btn:hover { background: var(--accent); transform: translateY(-2px); }
+        
+        .footer { text-align: center; margin-top: 40px; font-size: 0.75rem; color: #94a3b8; }
     </style>
 </head>
 <body>
 
     <div class="form-container">
-        <div id="form-content">
-            <h2>Operative Diagnostic</h2>
-            <div class="subtitle">Thymos Neuro • Phx Division</div>
+        <h2>Operative Diagnostic</h2>
+        <span class="subtitle">Thymos Neuro | Phx Division</span>
 
-            <div class="role-assignment-note">
-                ℹ️ <strong>System Note:</strong> You will be assigned to a specific role within your selected team based on your skills and experience.
+        <form action="https://formspree.io/f/xaqpzoly" method="POST">
+            
+            <div class="group">
+                <label>Full Name</label>
+                <input type="text" name="name" required placeholder="Enter full name">
             </div>
 
-            <form action="https://formspree.io/f/xaqpzoly" method="POST" class="form-grid">
-                
-                <div class="group">
-                    <label>Full Name</label>
-                    <input type="text" name="name" required>
+            <div class="group">
+                <label>Discord Tag</label>
+                <input type="text" name="discord" required placeholder="username#0000">
+            </div>
+
+            <div class="group">
+                <label>Phone Number</label>
+                <input type="tel" name="phone" placeholder="(602) 000-0000">
+            </div>
+
+            <div class="group">
+                <label>Current School / Institution</label>
+                <input type="text" name="school" placeholder="BASIS, ASU, etc.">
+            </div>
+
+            <div class="group">
+                <label>Target Team Designation</label>
+                <select name="target_team" required>
+                    <option value="" disabled selected>Select from the structure...</option>
+                    <option value="Executive Team">Executive Team</option>
+                    <option value="Project & Research Team">Project & Research Team</option>
+                    <option value="Financial Team">Financial Team</option>
+                    <option value="Outreach & Partnership Team">Outreach & Partnership Team</option>
+                    <option value="Technology & Systems Team">Technology & Systems Team</option>
+                    <option value="HR & Operations Team">HR & Operations Team</option>
+                </select>
+                <div class="assignment-msg">
+                    *Your specific role will be determined by your experience and skill.
                 </div>
+            </div>
 
-                <div class="group">
-                    <label>Discord Tag</label>
-                    <input type="text" name="discord" placeholder="username#0000" required>
-                </div>
+            <div class="portfolio-box">
+                <label>Portfolio & Examples of Work</label>
+                <textarea name="portfolio" rows="4" placeholder="Paste GitHub, LinkedIn, Drive, or Site links..."></textarea>
+                <p style="font-size: 0.75rem; margin-top: 15px; opacity: 0.7;">
+                    For large files, email <strong>thymosneuro@gmail.com</strong> with your Discord tag in the subject line.
+                </p>
+            </div>
 
-                <div class="group">
-                    <label>Phone Number</label>
-                    <input type="tel" name="phone" placeholder="(602) 000-0000">
-                </div>
+            <div class="group">
+                <label>Utility Brief</label>
+                <textarea name="brief" rows="4" placeholder="How will you assist in the 390-man expansion?"></textarea>
+            </div>
 
-                <div class="group">
-                    <label>School / Institution</label>
-                    <input type="text" name="school" placeholder="BASIS, ASU, etc.">
-                </div>
+            <button type="submit" class="submit-btn">Submit</button>
 
-                <div class="group full-width">
-                    <label>Target Team Designation</label>
-                    <select name="target_team" required>
-                        <option value="" disabled selected>Select a team...</option>
-                        <option value="Executive Team">Executive Team</option>
-                        <option value="Project & Research Team">Project & Research Team</option>
-                        <option value="Financial Team">Financial Team</option>
-                        <option value="Outreach & Partnership Team">Outreach & Partnership Team</option>
-                        <option value="Technology & Systems Team">Technology & Systems Team</option>
-                        <option value="HR & Operations Team">HR & Operations Team</option>
-                    </select>
-                </div>
+        </form>
 
-                <div class="work-section full-width">
-                    <label>📂 Portfolio & Evidence of Work</label>
-                    <textarea name="portfolio" rows="3" placeholder="Paste GitHub, Drive, or Portfolio URLs here..."></textarea>
-                    <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.7;">Email resumes/large files to <strong>thymosneuro@gmail.com</strong>.</p>
-                </div>
-
-                <div class="group full-width">
-                    <label>Utility Brief</label>
-                    <textarea name="brief" rows="3" placeholder="Describe your specific utility..."></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn full-width">Submit</button>
-            </form>
-        </div>
-
-        <div id="success-msg">
-            <h2 style="color: var(--accent);">Dossier Received.</h2>
-            <p>Your data has been transmitted to the Directorate. The vetting process has begun.</p>
-            <p><strong>Next Step:</strong> Join the Operations Hub to await assignment.</p>
-            <a href="https://discord.gg/YQhptznv" class="discord-btn">JOIN DISCORD HUB</a>
+        <div class="footer">
+            THYMOS NEURO DIRECTORATE • EST. 2026 :P
         </div>
     </div>
-
-    <script>
-        // Simple script to show success message if Formspree redirects back with a parameter
-        if (window.location.search.includes('success=true')) {
-            document.getElementById('form-content').style.display = 'none';
-            document.getElementById('success-msg').style.display = 'block';
-        }
-    </script>
 
 </body>
 </html>
