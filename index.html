@@ -5,133 +5,103 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        :root { 
-            --bg: #f8fafc; 
-            --text: #0f172a; 
-            --accent: #2563eb; 
-            --dark: #1e293b;
-            --border: #cbd5e1;
-        }
-        body { 
-            background: #f1f5f9; 
-            color: var(--text); 
-            font-family: 'Inter', -apple-system, sans-serif; 
-            margin: 0; padding: 50px 20px;
-            display: flex; justify-content: center;
-        }
-        .form-container { 
-            max-width: 800px; width: 100%; 
-            background: white; padding: 50px; 
-            border-radius: 16px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border: 1px solid var(--border);
-        }
+        :root { --bg: #f8fafc; --text: #0f172a; --accent: #2563eb; --dark: #1e293b; --border: #cbd5e1; }
+        body { background: #f1f5f9; color: var(--text); font-family: 'Inter', -apple-system, sans-serif; margin: 0; padding: 50px 20px; display: flex; justify-content: center; }
+        .form-container { max-width: 800px; width: 100%; background: white; padding: 50px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid var(--border); position: relative; }
         h2 { font-size: 2.2rem; margin: 0 0 10px 0; font-weight: 900; color: var(--dark); }
         .subtitle { color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 30px; display: block; letter-spacing: 2px; }
-
-        /* --- THE FIELDS --- */
         .group { margin-bottom: 25px; }
         label { display: block; font-weight: 700; margin-bottom: 10px; font-size: 0.85rem; color: #475569; text-transform: uppercase; }
-        
-        input, select, textarea { 
-            width: 100%; padding: 16px; border: 1.5px solid var(--border);
-            border-radius: 10px; font-size: 1rem; box-sizing: border-box;
-            background: #ffffff; transition: 0.2s;
-        }
-        input:focus, select:focus, textarea:focus { 
-            outline: none; border-color: var(--accent); 
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); 
-        }
-
-        /* ROLE ASSIGNMENT MESSAGE */
-        .assignment-msg { 
-            font-size: 0.85rem; color: #64748b; margin-top: 10px; 
-            font-weight: 500; font-style: italic; 
-        }
-
-        /* PORTFOLIO SECTION */
-        .portfolio-box { 
-            background: var(--dark); color: white; padding: 30px; 
-            border-radius: 12px; margin: 35px 0; 
-        }
+        input, select, textarea { width: 100%; padding: 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 1rem; box-sizing: border-box; background: #ffffff; transition: 0.2s; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+        .assignment-msg { font-size: 0.85rem; color: #64748b; margin-top: 10px; font-weight: 500; font-style: italic; }
+        .portfolio-box { background: var(--dark); color: white; padding: 30px; border-radius: 12px; margin: 35px 0; }
         .portfolio-box label { color: #38bdf8; }
         .portfolio-box textarea { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; }
-
-        .submit-btn { 
-            width: 100%; padding: 20px; background: var(--dark); color: white; 
-            border: none; border-radius: 10px; font-weight: 800; font-size: 1.1rem;
-            cursor: pointer; transition: 0.3s; margin-top: 10px;
-        }
+        .submit-btn { width: 100%; padding: 20px; background: var(--dark); color: white; border: none; border-radius: 10px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: 0.3s; margin-top: 10px; }
         .submit-btn:hover { background: var(--accent); transform: translateY(-2px); }
-        
         .footer { text-align: center; margin-top: 40px; font-size: 0.75rem; color: #94a3b8; }
+
+        /* SUCCESS OVERLAY */
+        #success-screen { display: none; text-align: center; padding: 20px 0; }
+        .discord-reminder { background: #5865F2; color: white; padding: 25px; border-radius: 12px; margin: 20px 0; text-decoration: none; display: block; font-weight: 800; font-size: 1.2rem; transition: 0.2s; }
+        .discord-reminder:hover { background: #4752c4; transform: scale(1.02); }
+        .done-btn { width: 100%; padding: 15px; background: #e2e8f0; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; color: var(--dark); }
     </style>
 </head>
 <body>
 
     <div class="form-container">
-        <h2>Operative Diagnostic</h2>
-        <span class="subtitle">Thymos Neuro | Phx Division</span>
+        <div id="diagnostic-form">
+            <h2>Operative Diagnostic</h2>
+            <span class="subtitle">Thymos Neuro | Phx Division</span>
 
-        <form action="https://formspree.io/f/xaqpzoly" method="POST">
-            
-            <div class="group">
-                <label>Full Name</label>
-                <input type="text" name="name" required placeholder="Enter full name">
-            </div>
-
-            <div class="group">
-                <label>Discord Tag</label>
-                <input type="text" name="discord" required placeholder="username#0000">
-            </div>
-
-            <div class="group">
-                <label>Phone Number</label>
-                <input type="tel" name="phone" placeholder="(602) 000-0000">
-            </div>
-
-            <div class="group">
-                <label>Current School / Institution</label>
-                <input type="text" name="school" placeholder="BASIS, ASU, etc.">
-            </div>
-
-            <div class="group">
-                <label>Target Team Designation</label>
-                <select name="target_team" required>
-                    <option value="" disabled selected>Select from the structure...</option>
-                    <option value="Executive Team">Executive Team</option>
-                    <option value="Project & Research Team">Project & Research Team</option>
-                    <option value="Financial Team">Financial Team</option>
-                    <option value="Outreach & Partnership Team">Outreach & Partnership Team</option>
-                    <option value="Technology & Systems Team">Technology & Systems Team</option>
-                    <option value="HR & Operations Team">HR & Operations Team</option>
-                </select>
-                <div class="assignment-msg">
-                    *Your specific role will be determined by your experience and skill.
+            <form id="main-form" action="https://formspree.io/f/xaqpzoly" method="POST">
+                <div class="group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" required placeholder="Enter full name">
                 </div>
-            </div>
-
-            <div class="portfolio-box">
-                <label>Portfolio & Examples of Work</label>
-                <textarea name="portfolio" rows="4" placeholder="Paste GitHub, LinkedIn, Drive, or Site links..."></textarea>
-                <p style="font-size: 0.75rem; margin-top: 15px; opacity: 0.7;">
-                    For large files, email <strong>thymosneuro@gmail.com</strong> with your Discord tag in the subject line.
-                </p>
-            </div>
-
-            <div class="group">
-                <label>Utility Brief</label>
-                <textarea name="brief" rows="4" placeholder="How will you assist in the 390-man expansion?"></textarea>
-            </div>
-
-            <button type="submit" class="submit-btn">Submit</button>
-
-        </form>
-
-        <div class="footer">
-            THYMOS NEURO DIRECTORATE • EST. 2026 :P
+                <div class="group">
+                    <label>Discord Tag</label>
+                    <input type="text" name="discord" required placeholder="username#0000">
+                </div>
+                <div class="group">
+                    <label>Phone Number</label>
+                    <input type="tel" name="phone" placeholder="(602) 000-0000">
+                </div>
+                <div class="group">
+                    <label>Current School / Institution</label>
+                    <input type="text" name="school" placeholder="BASIS, ASU, etc.">
+                </div>
+                <div class="group">
+                    <label>Target Team Designation</label>
+                    <select name="target_team" required>
+                        <option value="" disabled selected>Select from the structure...</option>
+                        <option value="Executive Team">Executive Team</option>
+                        <option value="Project & Research Team">Project & Research Team</option>
+                        <option value="Financial Team">Financial Team</option>
+                        <option value="Outreach & Partnership Team">Outreach & Partnership Team</option>
+                        <option value="Technology & Systems Team">Technology & Systems Team</option>
+                        <option value="HR & Operations Team">HR & Operations Team</option>
+                    </select>
+                    <div class="assignment-msg">*Your specific role will be determined by your experience and skill.</div>
+                </div>
+                <div class="portfolio-box">
+                    <label>Portfolio & Examples of Work</label>
+                    <textarea name="portfolio" rows="4" placeholder="Paste GitHub, LinkedIn, Drive, or Site links..."></textarea>
+                    <p style="font-size: 0.75rem; margin-top: 15px; opacity: 0.7;">Email resumes to <strong>thymosneuro@gmail.com</strong>.</p>
+                </div>
+                <div class="group">
+                    <label>Utility Brief</label>
+                    <textarea name="brief" rows="4" placeholder="How will you assist in the 390-man expansion?"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
         </div>
+
+        <div id="success-screen">
+            <h2 style="color: var(--accent);">Dossier Received.</h2>
+            <p style="font-weight: 600;">Thanks, but don't forget to join the Hub!</p>
+            <a href="https://discord.gg/YQhptznv" class="discord-reminder">📡 JOIN OPERATIONS DISCORD</a>
+            <p style="font-size: 0.85rem; color: #64748b; margin-top: 20px;">Click below to finalize your transmission.</p>
+            <button class="done-btn" onclick="document.getElementById('main-form').submit();">Done</button>
+        </div>
+
+        <div class="footer">THYMOS NEURO DIRECTORATE • EST. 2026 :P</div>
     </div>
+
+    <script>
+        const form = document.getElementById('main-form');
+        const formDiv = document.getElementById('diagnostic-form');
+        const successDiv = document.getElementById('success-screen');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop the initial send to show the Discord reminder
+            formDiv.style.display = 'none';
+            successDiv.style.display = 'block';
+            window.scrollTo(0,0);
+        });
+    </script>
 
 </body>
 </html>
