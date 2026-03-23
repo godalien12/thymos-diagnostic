@@ -18,7 +18,7 @@
             margin: 0; padding: 40px 20px; display: flex; justify-content: center;
         }
         .form-container { 
-            max-width: 650px; width: 100%; 
+            max-width: 700px; width: 100%; 
             background: var(--glass); backdrop-filter: blur(15px);
             padding: 45px; border-radius: 24px; border: 1px solid white;
             box-shadow: 0 20px 50px rgba(0,0,0,0.05);
@@ -31,7 +31,6 @@
             border-radius: 15px; margin-bottom: 35px; border-left: 4px solid #06b6d4;
         }
         .doc-link { color: #06b6d4; text-decoration: none; font-weight: 800; font-size: 0.9rem; }
-        .doc-link:hover { text-decoration: underline; }
 
         /* --- FORM GRID --- */
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -45,6 +44,9 @@
         }
         input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
 
+        /* HIGHLIGHT FOR EXEC ROLES */
+        .exec-notice { background: #fff9db; padding: 10px; border-radius: 8px; font-size: 0.75rem; color: #856404; margin-top: 5px; font-weight: 600; }
+
         .submit-btn { 
             width: 100%; padding: 20px; background: var(--dark); color: white; 
             border: none; border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.3s; font-size: 1.1rem;
@@ -56,29 +58,19 @@
 
     <div class="form-container">
         <h2>Operative Diagnostic</h2>
-        <div class="subtitle">Thymos Neuro • Phx Division</div>
+        <div class="subtitle">Thymos Neuro • Intake Portal</div>
 
         <div class="hierarchy-box">
             <h4 style="margin:0 0 10px 0; font-size: 0.8rem; color: #06b6d4; text-transform: uppercase;">⚠️ Mandatory Briefing</h4>
-            <p style="font-size: 0.85rem; margin-bottom: 15px; opacity: 0.8;">Identify your designation within the 390-man expansion before transmitting.</p>
-            <a href="https://docs.google.com/document/d/13In1GFXuGDf0e_xlH3TLc-woN2C9PQCWMtxooZpJw7E/edit?usp=sharing" target="_blank" class="doc-link">📂 OPEN HIERARCHY DOC</a>
+            <p style="font-size: 0.85rem; margin-bottom: 15px; opacity: 0.8;">Executive Tier applicants must provide a portfolio or evidence of prior project management.</p>
+            <a href="https://docs.google.com/document/d/13In1GFXuGDf0e_xlH3TLc-woN2C9PQCWMtxooZpJw7E/edit?usp=sharing" target="_blank" class="doc-link">📂 SYNCED HIERARCHY DOC</a>
         </div>
 
         <form action="https://formspree.io/f/xaqpzoly" method="POST" class="form-grid">
             
-            <div class="group full-width">
-                <label>Full Name / Operative Alias</label>
-                <input type="text" name="name" placeholder="John Doe" required>
-            </div>
-
             <div class="group">
-                <label>Email Address</label>
-                <input type="email" name="email" placeholder="name@example.com" required>
-            </div>
-
-            <div class="group">
-                <label>Phone Number</label>
-                <input type="tel" name="phone" placeholder="(602) 000-0000">
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="Legal/Alias" required>
             </div>
 
             <div class="group">
@@ -87,34 +79,42 @@
             </div>
 
             <div class="group">
-                <label>Current School/Institution</label>
-                <input type="text" name="school" placeholder="BASIS, ASU, etc.">
+                <label>Email</label>
+                <input type="email" name="email" required>
             </div>
 
             <div class="group">
-                <label>Target Designation</label>
+                <label>Phone Number</label>
+                <input type="tel" name="phone">
+            </div>
+
+            <div class="group">
+                <label>Current School</label>
+                <input type="text" name="school">
+            </div>
+
+            <div class="group">
+                <label>Target Designation (Synced)</label>
                 <select name="tier" required>
-                    <option value="" disabled selected>Select Tier...</option>
-                    <option value="directorate">Directorate Support</option>
-                    <option value="research">Research & Theory</option>
-                    <option value="outreach">Community Outreach</option>
-                    <option value="infrastructure">Infrastructure/Discord</option>
+                    <option value="" disabled selected>Consult Hierarchy Doc...</option>
+                    <option value="executive_directorate">Executive Directorate</option>
+                    <option value="intelligence_division">Intelligence Division</option>
+                    <option value="logistics_operations">Logistics & Operations</option>
+                    <option value="strategic_outreach">Strategic Outreach</option>
+                    <option value="technical_infrastructure">Technical Infrastructure</option>
+                    <option value="research_theory">Research & Theory</option>
                 </select>
-            </div>
-
-            <div class="group">
-                <label>Lead Source</label>
-                <select name="source">
-                    <option value="instagram">Instagram</option>
-                    <option value="discord">Discord Referral</option>
-                    <option value="school">School/Word of Mouth</option>
-                    <option value="dr_interested">Dr. Interested Network</option>
-                </select>
+                <div class="exec-notice">Executive roles require Portfolio/Link below.</div>
             </div>
 
             <div class="group full-width">
-                <label>Utility Statement</label>
-                <textarea name="message" rows="4" placeholder="Briefly describe your contribution to the expansion."></textarea>
+                <label>Portfolio / Evidence of Work (Link)</label>
+                <input type="url" name="portfolio_link" placeholder="GitHub, LinkedIn, Google Drive, or Site Link">
+            </div>
+
+            <div class="group full-width">
+                <label>Utility Brief</label>
+                <textarea name="message" rows="4" placeholder="How will your skills specifically facilitate the expansion?"></textarea>
             </div>
 
             <button type="submit" class="submit-btn full-width">TRANSMIT DOSSIER :P</button>
