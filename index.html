@@ -5,114 +5,108 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        :root { --bg: #0d1117; --card: #161b22; --text: #c9d1d9; --accent: #58a6ff; --border: #30363d; }
-        body { background-color: var(--bg); color: var(--text); font-family: -apple-system, sans-serif; padding: 20px; line-height: 1.6; }
-        .container { max-width: 600px; margin: auto; background: var(--card); padding: 30px; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h2 { color: var(--accent); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
-        p.subtitle { font-size: 0.8em; color: #8b949e; margin-bottom: 25px; }
-        label { display: block; margin-top: 15px; font-weight: 600; font-size: 0.85em; color: #8b949e; }
-        input, select, textarea { width: 100%; padding: 12px; margin-top: 8px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 6px; box-sizing: border-box; font-size: 16px; }
-        input:focus { border-color: var(--accent); outline: none; }
-        .role-group { display: none; margin-top: 15px; padding: 15px; background: rgba(88, 166, 255, 0.05); border-radius: 8px; border-left: 4px solid var(--accent); }
-        .checkbox-item { margin: 10px 0; display: flex; align-items: center; font-size: 0.9em; }
-        .checkbox-item input { width: auto; margin-right: 12px; margin-top: 0; transform: scale(1.2); }
-        button { width: 100%; padding: 15px; margin-top: 30px; background: var(--accent); border: none; color: white; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s; font-size: 1em; }
-        button:hover { background: #79c0ff; transform: translateY(-2px); }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        :root { 
+            --bg: #f0f4f8; 
+            --glass: rgba(255, 255, 255, 0.9);
+            --text: #102a43; 
+            --accent: #0056b3; 
+            --glow: #00d4ff;
+        }
+        body { 
+            background: radial-gradient(circle at top right, #e0eafc, #cfdef3); 
+            color: var(--text); 
+            font-family: 'Segoe UI', system-ui, sans-serif; 
+            margin: 0; padding: 40px 20px; min-height: 100vh;
+            display: flex; justify-content: center;
+        }
+        .form-container { 
+            max-width: 700px; width: 100%; 
+            background: var(--glass); backdrop-filter: blur(15px);
+            padding: 50px; border-radius: 30px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        h2 { font-size: 2.2rem; margin-bottom: 5px; letter-spacing: -1px; color: #000; }
+        .subtitle { color: var(--accent); font-weight: 800; letter-spacing: 2px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 30px; }
+
+        /* --- THE HIERARCHY BRIEFING --- */
+        .hierarchy-box { 
+            background: #102a43; color: white; padding: 25px; 
+            border-radius: 20px; margin-bottom: 35px; border-left: 5px solid var(--glow);
+        }
+        .hierarchy-box h4 { margin: 0 0 10px 0; color: var(--glow); text-transform: uppercase; font-size: 0.9rem; }
+        .hierarchy-box p { font-size: 0.85rem; line-height: 1.4; margin-bottom: 15px; opacity: 0.9; }
+        .doc-btn { 
+            display: inline-block; padding: 10px 20px; background: var(--accent); 
+            color: white; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 0.8rem;
+        }
+
+        /* --- FORM FIELDS --- */
+        .field-group { margin-bottom: 25px; }
+        label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 0.9rem; }
+        input, select, textarea { 
+            width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #d9e2ec;
+            background: rgba(255,255,255,0.5); font-size: 1rem; box-sizing: border-box;
+        }
+        input:focus { outline: none; border-color: var(--accent); background: white; }
+
+        .submit-btn { 
+            width: 100%; padding: 20px; background: var(--accent); color: white; 
+            border: none; border-radius: 15px; font-weight: 800; font-size: 1.1rem; 
+            cursor: pointer; transition: 0.3s; margin-top: 20px;
+        }
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,86,179,0.3); }
+        
+        .footer-note { text-align: center; margin-top: 30px; font-size: 0.75rem; color: #627d98; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>THYMOS NEURO</h2>
-    <p class="subtitle">OPERATIVE DIAGNOSTIC v2.2 | INTAKE PORTAL</p>
+    <div class="form-container">
+        <h2>Operative Diagnostic</h2>
+        <div class="subtitle">Thymos Neuro | Phx Division</div>
 
-    <form action="https://formspree.io/f/xaqpzoly" method="POST" enctype="multipart/form-data">
-        
-        <label>Full Legal Designation</label>
-        <input type="text" name="name" placeholder="First & Last Name" required>
+        <div class="hierarchy-box">
+            <h4>⚠️ MANDATORY: REVIEW DESIGNATION</h4>
+            <p>You must identify your utility tier before submission. Review the active staffing hierarchy to ensure your skills align with the Directorate's needs.</p>
+            <a href="https://docs.google.com/document/d/13In1GFXuGDf0e_xlH3TLc-woN2C9PQCWMtxooZpJw7E/edit?usp=sharing" target="_blank" class="doc-btn">📂 OPEN STAFFING HIERARCHY</a>
+        </div>
 
-        <div class="grid">
-            <div>
-                <label>Discord Username</label>
-                <input type="text" name="discord" placeholder="username#0000" required>
+        <form action="https://formspree.io/f/xaqpzoly" method="POST">
+            <div class="field-group">
+                <label>Full Name / Operative Alias</label>
+                <input type="text" name="name" placeholder="Enter Identity" required>
             </div>
-            <div>
-                <label>Phone Number</label>
-                <input type="tel" name="phone" placeholder="(602) 555-0123" required>
+
+            <div class="field-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="Comms Channel" required>
             </div>
+
+            <div class="field-group">
+                <label>Requested Designation (Tier)</label>
+                <select name="designation" required>
+                    <option value="" disabled selected>Select from Hierarchy</option>
+                    <option value="directorate">Directorate Support</option>
+                    <option value="research">Research & Theory</option>
+                    <option value="outreach">Community Outreach</option>
+                    <option value="infrastructure">Systems / Discord Infrastructure</option>
+                    <option value="marketing">Marketing / Social Media</option>
+                </select>
+            </div>
+
+            <div class="field-group">
+                <label>Utility Statement</label>
+                <textarea name="utility" rows="4" placeholder="How will you assist in the 390-man expansion?"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">TRANSMIT DOSSIER :P</button>
+        </form>
+
+        <div class="footer-note">
+            TRANSMISSION SECURE • THYMOS NEURO DIRECTORATE • © 2026
         </div>
-
-        <label>School / Institution</label>
-        <input type="text" name="school" placeholder="e.g. BASIS Phoenix" required>
-
-        <label>Contact Email</label>
-        <input type="email" name="email" placeholder="email@example.com" required>
-
-        <label>Primary Division Allocation</label>
-        <select name="division" id="division" onchange="updateRoles()" required>
-            <option value="">-- Select Division --</option>
-            <option value="exec">Executive Directorate</option>
-            <option value="tech">Technology & Systems</option>
-            <option value="outreach">Outreach & Global Envoys</option>
-            <option value="ops">HR & Internal Operations</option>
-        </select>
-
-        <div id="exec-group" class="role-group">
-            <label>Executive Focus:</label>
-            <div class="checkbox-item"><input type="checkbox" name="role[]" value="Co-Executive"> Co-Executive</div>
-            <div class="checkbox-item"><input type="checkbox" name="role[]" value="CTO"> CTO</div>
-            <div class="checkbox-item"><input type="checkbox" name="role[]" value="CHRO"> CHRO</div>
-            <div class="checkbox-item"><input type="checkbox" name="role[]" value="CFO"> CFO</div>
-        </div>
-
-        <div id="tech-group" class="role-group">
-            <label>Technical Focus:</label>
-            <div class="checkbox-item"><input type="checkbox" name="role[]" value="Systems Director"> Systems Director</div>
-            <div class="checkbox-item"><input type="checkbox" name="role[]" value="Web Dev"> Web/Product Dev</div>
-            <div class="checkbox-item"><input type="checkbox" name="role[]" value="Automation Lead"> Automation Lead</div>
-        </div>
-
-        <div id="outreach-group" class="role-group">
-            <label>Outreach Focus:</label>
-            <div class="checkbox-item"><input type="checkbox" name="role[]" value="Outreach Director"> Outreach Director</div>
-            <div class="checkbox-item"><input type="checkbox" name="role[]" value="Ambassador"> Community Ambassador</div>
-            <div class="checkbox-item"><input type="checkbox" name="role[]" value="Media Head"> Media Head</div>
-        </div>
-
-        <div id="ops-group" class="role-group">
-            <label>Operations Focus:</label>
-            <div class="checkbox-item"><input type="checkbox" name="role[]" value="HR Director"> HR Director</div>
-            <div class="checkbox-item"><input type="checkbox" name="role[]" value="Talent Scout"> Talent Scout</div>
-            <div class="checkbox-item"><input type="checkbox" name="role[]" value="Copywriter"> Copywriter/Editor</div>
-        </div>
-
-        <label>Portfolio / Evidence (Link or File)</label>
-        <input type="text" name="portfolio_link" placeholder="Google Drive or GitHub Link">
-        <label>Portfolio / Evidence (Link or File)</label>
-<input type="text" name="portfolio_link" placeholder="Google Drive or GitHub Link">
-<p style="font-size: 0.8em; color: #8b949e; margin-top: 10px;">
-  For evidence file uploads, please send an email to 
-  <a href="mailto:thymosneuro@gmail.com" style="color: var(--accent); text-decoration: none;">thymosneuro@gmail.com</a>
-</p>
-
-        <label>Strategic Vision</label>
-        <textarea name="vision" rows="4" placeholder="Briefly describe your goals for Thymos Neuro..."></textarea>
-
-        <button type="submit">TRANSMIT TO VAULT</button>
-    </form>
-</div>
-
-<script>
-    function updateRoles() {
-        document.querySelectorAll('.role-group').forEach(el => el.style.display = 'none');
-        const val = document.getElementById('division').value;
-        if(val) {
-            const target = document.getElementById(val + '-group');
-            if(target) target.style.display = 'block';
-        }
-    }
-</script>
+    </div>
 
 </body>
 </html>
