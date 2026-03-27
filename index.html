@@ -1,107 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>THYMOS NEURO | Operative Diagnostic</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thymos Neuro | PHX Division</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #f8fafc; --text: #0f172a; --accent: #2563eb; --dark: #1e293b; --border: #cbd5e1; }
-        body { background: #f1f5f9; color: var(--text); font-family: 'Inter', -apple-system, sans-serif; margin: 0; padding: 50px 20px; display: flex; justify-content: center; }
-        .form-container { max-width: 800px; width: 100%; background: white; padding: 50px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid var(--border); position: relative; }
-        h2 { font-size: 2.2rem; margin: 0 0 10px 0; font-weight: 900; color: var(--dark); }
-        .subtitle { color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 30px; display: block; letter-spacing: 2px; }
-        .group { margin-bottom: 25px; }
-        label { display: block; font-weight: 700; margin-bottom: 10px; font-size: 0.85rem; color: #475569; text-transform: uppercase; }
-        input, select, textarea { width: 100%; padding: 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 1rem; box-sizing: border-box; background: #ffffff; transition: 0.2s; }
-        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
-        .assignment-msg { font-size: 0.85rem; color: #64748b; margin-top: 10px; font-weight: 500; font-style: italic; }
-        .portfolio-box { background: var(--dark); color: white; padding: 30px; border-radius: 12px; margin: 35px 0; }
-        .portfolio-box label { color: #38bdf8; }
-        .portfolio-box textarea { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; }
-        .submit-btn { width: 100%; padding: 20px; background: var(--dark); color: white; border: none; border-radius: 10px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: 0.3s; margin-top: 10px; }
-        .submit-btn:hover { background: var(--accent); transform: translateY(-2px); }
-        .footer { text-align: center; margin-top: 40px; font-size: 0.75rem; color: #94a3b8; }
+        :root {
+            --bg: #030712;
+            --glass: rgba(17, 24, 39, 0.7);
+            --accent: #3b82f6;
+            --text: #f3f4f6;
+        }
 
-        /* SUCCESS OVERLAY */
-        #success-screen { display: none; text-align: center; padding: 20px 0; }
-        .discord-reminder { background: #5865F2; color: white; padding: 25px; border-radius: 12px; margin: 20px 0; text-decoration: none; display: block; font-weight: 800; font-size: 1.2rem; transition: 0.2s; }
-        .discord-reminder:hover { background: #4752c4; transform: scale(1.02); }
-        .done-btn { width: 100%; padding: 15px; background: #e2e8f0; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; color: var(--dark); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #030712 100%);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--glass); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px;
+        }
+
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { 
+            color: var(--text); text-decoration: none; font-weight: 500; font-size: 0.9rem;
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* --- THE BRAIN-T ICON --- */
+        .brain-t {
+            width: 50px; height: 50px; background: var(--accent);
+            border-radius: 50% 50% 40% 40%; position: relative;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+            animation: pulse 2s infinite;
+        }
+        .brain-t::before { content: 'T'; font-family: 'Space Mono'; font-weight: bold; font-size: 1.5rem; color: white; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+        /* --- HERO SECTION --- */
+        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .hero h1 { font-size: 4rem; letter-spacing: -2px; margin-bottom: 10px; }
+        .hero p { font-family: 'Space Mono'; color: var(--accent); margin-bottom: 30px; }
+
+        .btn-join {
+            background: var(--accent); color: white; padding: 15px 40px;
+            border-radius: 50px; text-decoration: none; font-weight: bold;
+            display: inline-flex; align-items: center; gap: 15px; transition: 0.3s;
+        }
+        .btn-join:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4); }
+
+        /* --- SIDEWAYS SCROLL (INSTA-STYLE) --- */
+        .field-reports { padding: 80px 20px; text-align: center; }
+        .scroll-container {
+            display: flex; overflow-x: auto; gap: 20px; padding: 40px 0;
+            scroll-snap-type: x mandatory; scrollbar-width: none;
+        }
+        .scroll-container::-webkit-scrollbar { display: none; }
+        .report-card {
+            flex: 0 0 300px; height: 350px; background: var(--glass);
+            border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);
+            scroll-snap-align: center; overflow: hidden; position: relative;
+        }
+        .report-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+        .report-tag { position: absolute; bottom: 20px; left: 20px; font-family: 'Space Mono'; font-size: 0.8rem; background: var(--accent); padding: 5px 10px; border-radius: 5px; }
+
+        /* --- FORM SECTION --- */
+        .form-section { padding: 100px 20px; max-width: 800px; margin: auto; }
+        .glass-panel { background: var(--glass); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); }
+        input, select, textarea { 
+            width: 100%; padding: 15px; margin: 10px 0; background: rgba(0,0,0,0.3); 
+            border: 1px solid #374151; color: white; border-radius: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="form-container">
-        <div id="diagnostic-form">
-            <h2>Operative Diagnostic</h2>
-            <span class="subtitle">Thymos Neuro | Phx Division</span>
+    <nav>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="brain-t"></div>
+            <span style="font-weight: bold; letter-spacing: 2px;">THYMOS</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Intel</a></li>
+            <li><a href="#">Directorate</a></li>
+            <li><a href="#">Research</a></li>
+            <li><a href="#">Archive</a></li>
+            <li><a href="#">Portal</a></li>
+        </ul>
+    </nav>
 
-            <form id="main-form" action="https://formspree.io/f/xaqpzoly" method="POST">
-                <div class="group">
-                    <label>Full Name</label>
-                    <input type="text" name="name" required placeholder="Enter full name">
-                </div>
-                <div class="group">
-                    <label>Discord Tag</label>
-                    <input type="text" name="discord" required placeholder="username#0000">
-                </div>
-                <div class="group">
-                    <label>Phone Number</label>
-                    <input type="tel" name="phone" placeholder="(602) 000-0000">
-                </div>
-                <div class="group">
-                    <label>Current School / Institution</label>
-                    <input type="text" name="school" placeholder="BASIS, ASU, etc.">
-                </div>
-                <div class="group">
-                    <label>Target Team Designation</label>
-                    <select name="target_team" required>
-                        <option value="" disabled selected>Select from the structure...</option>
-                        <option value="Executive Team">Executive Team</option>
-                        <option value="Project & Research Team">Project & Research Team</option>
-                        <option value="Financial Team">Financial Team</option>
-                        <option value="Outreach & Partnership Team">Outreach & Partnership Team</option>
-                        <option value="Technology & Systems Team">Technology & Systems Team</option>
-                        <option value="HR & Operations Team">HR & Operations Team</option>
-                    </select>
-                    <div class="assignment-msg">*Your specific role will be determined by your experience and skill.</div>
-                </div>
-                <div class="portfolio-box">
-                    <label>Portfolio & Examples of Work</label>
-                    <textarea name="portfolio" rows="4" placeholder="Paste GitHub, LinkedIn, Drive, or Site links..."></textarea>
-                    <p style="font-size: 0.75rem; margin-top: 15px; opacity: 0.7;">Email resumes to <strong>thymosneuro@gmail.com</strong>.</p>
-                </div>
-                <div class="group">
-                    <label>Utility Brief</label>
-                    <textarea name="brief" rows="4" placeholder="How will you assist in the 390-man expansion?"></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Submit</button>
+    <section class="hero">
+        <h1>EXPANSION PHASE 01</h1>
+        <p>[390-MAN GLOBAL INITIATIVE]</p>
+        <a href="#join" class="btn-join">JOIN OPERATIONS <div class="brain-t" style="width: 25px; height: 25px; box-shadow: none;"></div></a>
+    </section>
+
+    <section id="join" class="form-section">
+        <div class="glass-panel">
+            <h2 style="margin-bottom: 20px;">DIAGNOSTIC INTAKE</h2>
+            <form action="YOUR_WEBHOOK_URL" method="POST">
+                <input type="text" placeholder="Full Identity (Name)" required>
+                <input type="text" placeholder="Discord Operative Tag" required>
+                <select required>
+                    <option value="" disabled selected>Target Division</option>
+                    <option>Executive Directorate</option>
+                    <option>Research & Physics</option>
+                    <option>Tech & Systems</option>
+                    <option>Outreach & Finance</option>
+                </select>
+                <textarea placeholder="Portfolio / Evidence of Utility" rows="4"></textarea>
+                <button type="submit" class="btn-join" style="width: 100%; border: none; cursor: pointer; justify-content: center;">SUBMIT DOSSIER</button>
             </form>
         </div>
+    </section>
 
-        <div id="success-screen">
-            <h2 style="color: var(--accent);">Dossier Received.</h2>
-            <p style="font-weight: 600;">Thanks, but don't forget to join the Hub!</p>
-            <a href="https://discord.gg/YQhptznv" class="discord-reminder">📡 JOIN OPERATIONS DISCORD</a>
-            <p style="font-size: 0.85rem; color: #64748b; margin-top: 20px;">Click below to finalize your transmission.</p>
-            <button class="done-btn" onclick="document.getElementById('main-form').submit();">Done</button>
+    <section class="field-reports">
+        <h2 style="font-family: 'Space Mono'; letter-spacing: 5px;">FIELD REPORTS</h2>
+        <div class="scroll-container">
+            <div class="report-card"><img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=300" alt="R1"><div class="report-tag">NEURAL_MAP_V1</div></div>
+            <div class="report-card"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=300" alt="R2"><div class="report-tag">DATA_SYNC</div></div>
+            <div class="report-card"><img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=300" alt="R3"><div class="report-tag">PHX_CORE</div></div>
+            <div class="report-card"><img src="https://images.unsplash.com/photo-1614728263952-84ea206f99b6?auto=format&fit=crop&w=300" alt="R4"><div class="report-tag">INTEL_09</div></div>
+            <div class="report-card"><img src="https://images.unsplash.com/photo-1532187875605-2fe35851142b?auto=format&fit=crop&w=300" alt="R5"><div class="report-tag">RESEARCH_04</div></div>
         </div>
-
-        <div class="footer">THYMOS NEURO DIRECTORATE • EST. 2026 :P</div>
-    </div>
-
-    <script>
-        const form = document.getElementById('main-form');
-        const formDiv = document.getElementById('diagnostic-form');
-        const successDiv = document.getElementById('success-screen');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Stop the initial send to show the Discord reminder
-            formDiv.style.display = 'none';
-            successDiv.style.display = 'block';
-            window.scrollTo(0,0);
-        });
-    </script>
+    </section>
 
 </body>
 </html>
